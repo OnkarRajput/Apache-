@@ -86,12 +86,15 @@ SSLCertificateKeyFile /var/www/test.com/sslforfree/private.key
 SSLCertificateFile /var/www/test.com/sslforfree/certificate.crt
 
 ===HSTS (optional)
+
 Header always set Strict-Transport-Security "max-age=63072000; includeSubdomains;"
 
 == Remove this if you need to use frames or iframes
+
 Header always set X-Frame-Options DENY
 
 == Prevent MIME based attacks
+
 Header set X-Content-Type-Options "nosniff"
 
 == Reverse proxy configuration
@@ -106,6 +109,7 @@ ProxyPassReverse http://localhost:8070/
 </VirtualHost>
 
 # Enable and start the Apache service
+
 systemctl enable httpd && systemctl start httpd
 
 
