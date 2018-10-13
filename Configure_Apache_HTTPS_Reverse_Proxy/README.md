@@ -27,28 +27,39 @@ vim /etc/httpd/conf.d/www.test.com.conf
 === HTTP
 
 <VirtualHost *:80>
+
   ServerName test.com
+
   ServerAlias www.test.com
+
   DocumentRoot /var/www/test/public
 
 ===Redirect any HTTP request to HTTPS
 
 RewriteEngine On
+
 RewriteCond %{HTTPS} off
+
 RewriteRule (.*) https://%{SERVER_NAME}/$1 [R,L]
 
 === Logging
 
 LogLevel warn
+
 ErrorLog /var/log/httpd/test.error.log
+
 CustomLog /var/log/httpd/test.access.log combined
 
 <Directory /var/www/test/public>
+
 AllowOverride All
+
 </Directory>
 
 <DirectoryMatch "/\.git">
+
     Require all denied
+
 </DirectoryMatch>
 
 </VirtualHost>
@@ -59,30 +70,43 @@ AllowOverride All
 <VirtualHost *:443>
 
  ServerName test.com
+
  ServerAlias www.test.com
 
 === Logging
 
 LogLevel warn
+
 ErrorLog /var/log/httpd/test.error.log
+
 CustomLog /var/log/httpd/test.access.log combined
 
 <Directory /var/www/test.com/167fr/public>
+
 AllowOverride All
+
 </Directory>
 
 <DirectoryMatch "/\.git">
+
     Require all denied
+
 </DirectoryMatch>
 
 === SSL Configuration - uses strong cipher list - these might need to be downgraded if you need to support older browsers/devices
 
 SSLEngine on
+
 SSLCipherSuite EECDH+AESGCM:EDH+AESGCM:AES256+EECDH:AES256+EDH
+
 SSLProtocol All -SSLv2 -SSLv3 -TLSv1 -TLSv1.1
+
 SSLHonorCipherOrder On
+
 SSLCACertificateFile  /var/www/test.com/sslforfree/ca_bundle.crt
+
 SSLCertificateKeyFile /var/www/test.com/sslforfree/private.key
+
 SSLCertificateFile /var/www/test.com/sslforfree/certificate.crt
 
 ===HSTS (optional)
@@ -100,7 +124,9 @@ Header set X-Content-Type-Options "nosniff"
 == Reverse proxy configuration
 
 <Location />
+
 ProxyPass http://localhost:8070/
+
 ProxyPassReverse http://localhost:8070/
 
 </Location>
