@@ -58,7 +58,7 @@ AllowOverride All
 
 <DirectoryMatch "/\.git">
 
-    Require all denied
+Require all denied
 
 </DirectoryMatch>
 
