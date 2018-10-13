@@ -85,13 +85,15 @@ CustomLog /var/log/httpd/test.access.log combined
 
 AllowOverride All
 
+
 </Directory>
 
 <DirectoryMatch "/\.git">
 
-    Require all denied
+Require all denied
 
 </DirectoryMatch>
+
 
 === SSL Configuration - uses strong cipher list - these might need to be downgraded if you need to support older browsers/devices
 
