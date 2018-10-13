@@ -1,11 +1,13 @@
 # Apache----
 
-#What is a reverse proxy?
+# What is a reverse proxy?
+
 A reverse proxy accepts connections and then routes them to the appropriate backend server. For example, if we have a Ruby application running on 127.0.0.1:3000, we can configure
 a reverse proxy to accept connections on HTTP or HTTPS, which can then transparently proxy requests to the ruby backend.
 
 
-#What are reverse proxies used for?
+# What are reverse proxies used for?
+
 Backend routing logic/transparent routing
 Network ACLs
 Logging
@@ -13,10 +15,11 @@ URL rewriting
 Virtualhost configuration
 Easy SSL configuration
 
-#Firstly, ensure that Apache is installed
+# Firstly, ensure that Apache is installed
+
 yum install httpd mod_ssl -y
 
-#Define Apache reverse proxy configuration
+# Define Apache reverse proxy configuration
 
 vim /etc/httpd/conf.d/www.test.com.conf
 
@@ -102,7 +105,7 @@ ProxyPassReverse http://localhost:8070/
 
 </VirtualHost>
 
-#Enable and start the Apache service
+# Enable and start the Apache service
 systemctl enable httpd && systemctl start httpd
 
 
