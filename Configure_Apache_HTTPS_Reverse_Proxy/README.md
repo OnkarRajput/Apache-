@@ -21,20 +21,20 @@ yum install httpd mod_ssl -y
 vim /etc/httpd/conf.d/www.test.com.conf
 
 
-# HTTP
+=== HTTP
 
 <VirtualHost *:80>
   ServerName test.com
   ServerAlias www.test.com
   DocumentRoot /var/www/test/public
 
-# Redirect any HTTP request to HTTPS
+===Redirect any HTTP request to HTTPS
 
 RewriteEngine On
 RewriteCond %{HTTPS} off
 RewriteRule (.*) https://%{SERVER_NAME}/$1 [R,L]
 
-# Logging
+=== Logging
 
 LogLevel warn
 ErrorLog /var/log/httpd/test.error.log
@@ -51,14 +51,14 @@ AllowOverride All
 </VirtualHost>
 
 
-# HTTPS
+=== HTTPS
 
 <VirtualHost *:443>
 
  ServerName test.com
  ServerAlias www.test.com
 
-# Logging
+=== Logging
 
 LogLevel warn
 ErrorLog /var/log/httpd/test.error.log
@@ -72,7 +72,7 @@ AllowOverride All
     Require all denied
 </DirectoryMatch>
 
-# SSL Configuration - uses strong cipher list - these might need to be downgraded if you need to support older browsers/devices
+=== SSL Configuration - uses strong cipher list - these might need to be downgraded if you need to support older browsers/devices
 
 SSLEngine on
 SSLCipherSuite EECDH+AESGCM:EDH+AESGCM:AES256+EECDH:AES256+EDH
@@ -82,16 +82,16 @@ SSLCACertificateFile  /var/www/test.com/sslforfree/ca_bundle.crt
 SSLCertificateKeyFile /var/www/test.com/sslforfree/private.key
 SSLCertificateFile /var/www/test.com/sslforfree/certificate.crt
 
-# HSTS (optional)
+===HSTS (optional)
 Header always set Strict-Transport-Security "max-age=63072000; includeSubdomains;"
 
-# Remove this if you need to use frames or iframes
+== Remove this if you need to use frames or iframes
 Header always set X-Frame-Options DENY
 
-# Prevent MIME based attacks
+== Prevent MIME based attacks
 Header set X-Content-Type-Options "nosniff"
 
-# Reverse proxy configuration
+== Reverse proxy configuration
 
 <Location />
 ProxyPass http://localhost:8070/
